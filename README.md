@@ -10,19 +10,32 @@
 
 Image
   ↓
+  
 DenseNet121 (pretrained، حذف لایه طبقه‌بندی)
+
   ↓
+  
 ویژگی تصویر (1024 بعد)
   ↓
+  
 Linear Projection → Image Embedding (768 بعد)
+
                 ┐
+                
 Text Tokens → BERT Embedding (768 بعد)
+
                 ├── Concatenate (1536 بعد)
+                
                 ↓
+                
           Uni-directional LSTM
+          
                 ↓
+                
       Residual Connection
+      
                 ↓
+                
         Linear + Softmax → پیش‌بینی توکن بعدی
 
 ### اجزای کلیدی
