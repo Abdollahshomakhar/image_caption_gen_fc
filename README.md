@@ -4,29 +4,49 @@
 این پروژه یک مدل Image Captioning پیاده‌سازی کرده که با ترکیب ویژگی‌های تصویری و زبانی، کپشن متنی تولید می‌کند.  
 معماری از **DenseNet برای تصویر** و **BERT Embedding + LSTM Decoder** برای متن استفاده می‌کند.
 
----
+
 
 ## معماری مد
 Image
+
   ↓
-DenseNet121 (pretrained, no classifier)
+  
+DenseNet121 (pretrained, بدون لایه طبقه‌بندی)
+
   ↓
-Image Feature (1024)
+  
+Image Feature Vector (1024)
+
   ↓
+  
 Linear Projection
+
   ↓
-768-dim Image Embedding
-                ┐
-Text Tokens → BERT Embedding (768)
-                ├─ Concatenate (1536)
-                ↓
-             Uni-LSTM
-                ↓
-        Residual Connection
-                ↓
-         Linear + Softmax
-                ↓
-          Next Token
+  
+Image Embedding (768
+
+                 ↓
+                 
+Text Tokens → BERT Word Embeddings (768)
+
+                 ├── Concatenate → Combined Embedding (1536)
+                 
+                 ↓
+                 
+          Uni-directional LSTM
+          
+                 ↓
+                 
+          Residual Connection
+          
+                 ↓
+                 
+          Linear + Softmax
+          
+                 ↓
+                 
+          Predicted Next Token
+
 
 ### اجزای کلیدی
 - **DenseNet121**: استخراج ویژگی تصویری
@@ -35,7 +55,6 @@ Text Tokens → BERT Embedding (768)
 - **Uni-LSTM Decoder**: تولید توالی کلمات
 - **Residual Path**: بهبود جریان گرادیان و پایداری آموزش
 
----
 
 ## Dataset و Tokenization
 - استفاده از **HuggingFace BertTokenizer**
