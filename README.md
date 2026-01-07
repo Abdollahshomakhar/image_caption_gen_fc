@@ -6,37 +6,27 @@
 
 ---
 
-## معماری مدل
-
+## معماری مد
 Image
   ↓
-  
-DenseNet121 (pretrained، حذف لایه طبقه‌بندی)
-
+DenseNet121 (pretrained, no classifier)
   ↓
-  
-ویژگی تصویر (1024 بعد)
+Image Feature (1024)
   ↓
-  
-Linear Projection → Image Embedding (768 بعد)
-
+Linear Projection
+  ↓
+768-dim Image Embedding
                 ┐
-                
-Text Tokens → BERT Embedding (768 بعد)
-
-                ├── Concatenate (1536 بعد)
-                
+Text Tokens → BERT Embedding (768)
+                ├─ Concatenate (1536)
                 ↓
-                
-          Uni-directional LSTM
-          
+             Uni-LSTM
                 ↓
-                
-      Residual Connection
-      
+        Residual Connection
                 ↓
-                
-        Linear + Softmax → پیش‌بینی توکن بعدی
+         Linear + Softmax
+                ↓
+          Next Token
 
 ### اجزای کلیدی
 - **DenseNet121**: استخراج ویژگی تصویری
